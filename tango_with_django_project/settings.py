@@ -14,15 +14,23 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+<<<<<<< HEAD
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+=======
+
+>>>>>>> ebe6b19e8276a19c1a1b32774919c9f21e0b0713
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+<<<<<<< HEAD
 SECRET_KEY = '4webx(kkz4@jtxdy25fd**ljc=8h%s)eeea4&4y^g7&k^c68sl'
+=======
+SECRET_KEY = 'lrrw6*aoj*lau&)3&jom2=a64m&6ch-bz^vpyx*si$w^k&vwr1'
+>>>>>>> ebe6b19e8276a19c1a1b32774919c9f21e0b0713
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,7 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+<<<<<<< HEAD
     'rango',
+=======
+>>>>>>> ebe6b19e8276a19c1a1b32774919c9f21e0b0713
 ]
 
 MIDDLEWARE = [
@@ -57,7 +68,11 @@ ROOT_URLCONF = 'tango_with_django_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [TEMPLATE_DIR, ],
+=======
+        'DIRS': [],
+>>>>>>> ebe6b19e8276a19c1a1b32774919c9f21e0b0713
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,7 +80,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+<<<<<<< HEAD
                 'django.template.context_processors.media',
+=======
+>>>>>>> ebe6b19e8276a19c1a1b32774919c9f21e0b0713
             ],
         },
     },
@@ -103,8 +121,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+<<<<<<< HEAD
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+=======
+>>>>>>> ebe6b19e8276a19c1a1b32774919c9f21e0b0713
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -123,5 +144,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+<<<<<<< HEAD
 STATICFILES_DIRS = [STATIC_DIR, ]
+=======
+>>>>>>> ebe6b19e8276a19c1a1b32774919c9f21e0b0713
 STATIC_URL = '/static/'
