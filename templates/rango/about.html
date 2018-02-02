@@ -2,11 +2,7 @@
 {% load staticfiles %}
 
 {% block body_block %}
-<div>
-<strong>{{ message }}</strong><br />
-</div>
-<div>
-<img src="{{ MEDIA_URL}}images/cat.jpg" alt="Picture of a disgusted cat" /><br />
-This tutorial has been put together by Marija Vaskeviciute
-</div>
+    <strong>{{ message }}</strong><br />
+    <img src="{{ MEDIA_URL}}cat.jpg" alt="Picture of a disgusted cat" /><br />
+    This tutorial has been put together by Marija Vaskeviciute
 {% endblock %}
