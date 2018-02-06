@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from rango.models import Category, Page
@@ -31,6 +32,7 @@ def show_category(request, category_name_slug):
         context_dict['pages'] = None
     return render(request, 'rango/category.html', context=context_dict)
 
+@login_required
 def add_category(request):
     form = CategoryForm()
     if request.method == 'POST':
@@ -43,6 +45,7 @@ def add_category(request):
             print(form.errors)
     return render(request, 'rango/add_category.html', {'form': form})
 
+@login_required
 def add_page(request, category_name_slug):
     try:
         category=Category.objects.get(slug=category_name_slug)
@@ -94,7 +97,7 @@ def register(request):
     return render(request, 'rango/register.html', context=context_dict)
 
 def user_login(request):
-    if request == 'POST':
+    if request.method == 'POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
         user=authenticate(username=username, password=password)
@@ -103,14 +106,21 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse('index'))
             else:
-                return HttpResponse("Your Rango account is disabled.")
+                context_dict={'message':"Your Rango account is disabled."}
+                return render(request, 'rango/login.html', context=context_dict)
         else:
+            context_dict={'message':"Invalid login details supplied."}
             print ("Invalid login details: {0}, {1}".format(username,password))
-            return("Invalid login details supplied.")
+            return render(request, 'rango/login.html', context=context_dict)
     else:
         return render(request, 'rango/login.html', {})
 
-@ login_required
+@login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+@login_required
+def restricted(request):
+    context_dict={'message': "Pitchforked peasant with murder in their eyes."}
+    return render(request, 'rango/restricted.html', context=context_dict)
