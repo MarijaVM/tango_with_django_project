@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from rango.models import Category, Page
 from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm
+from datetime import datetime
 
 # Create your views here.
 
@@ -14,10 +15,15 @@ def index(request):
     context_dict = {'boldmessage':'What a day, what a day!',
                     'categories':category_list,
                     'pages':page_list}
-    return render(request, 'rango/index.html', context=context_dict)
+    visitor_cookie_handler(request)
+    context_dict['visits']=request.session['visits']
+    response = render(request, 'rango/index.html', context=context_dict)
+    return response
 
 def about(request):
+    visitor_cookie_handler(request)
     context_dict = {'message':'Rango says the about page'}
+    context_dict['visits']=request.session['visits']
     return render(request, 'rango/about.html', context=context_dict)
 
 def show_category(request, category_name_slug):
@@ -124,3 +130,23 @@ def user_logout(request):
 def restricted(request):
     context_dict={'message': "Pitchforked peasant with murder in their eyes."}
     return render(request, 'rango/restricted.html', context=context_dict)
+
+# Helper functions.
+def get_server_side_cookie(request, cookie, default_val=None):
+    val=request.session.get(cookie)
+    if not val:
+        val=default_val
+    return val
+
+def visitor_cookie_handler(request):
+    visits=int(request.COOKIES.get('visitors', '1'))
+    last_visit_cookie=request.COOKIES.get('last_visit', str(datetime.now()))
+    last_visit_time=datetime.strptime(last_visit_cookie[:-7], '%Y-%m-%d %H:%M:%S')
+
+    if(datetime.now() - last_visit_time).days > 0:
+        visits=visits+1
+        request.session['last_visit']=str(datetime.now())
+    else:
+        visits=1
+        request.session['last_visit']=last_visit_cookie
+    request.session['visits']=visits
