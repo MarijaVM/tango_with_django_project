@@ -3,7 +3,8 @@
 
 {% block body_block %}
     <strong>{{ message }}</strong><br />
-    If anyone cares, you visited the site {{ visits }} time(s).<br />
-    <img src="{{ MEDIA_URL}}cat.jpg" alt="Picture of a disgusted cat" /><br />
+    Visits: {{ visits }}<br />
+    <img src="{{ MEDIA_URL}}cat.jpg" alt="Picture of a cat" />
+    <img src="{% static 'images/rango_unchained_by_lohenhart.jpg' %}" alt="Rango Unchained by Lohenhart"><br />
     This tutorial has been put together by Marija Vaskeviciute
 {% endblock %}
