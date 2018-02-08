@@ -22,7 +22,7 @@ def index(request):
 
 def about(request):
     visitor_cookie_handler(request)
-    context_dict = {'message':'Rango says the about page'}
+    context_dict = {'message':'Rango says here is the about page'}
     context_dict['visits']=request.session['visits']
     return render(request, 'rango/about.html', context=context_dict)
 
@@ -147,6 +147,6 @@ def visitor_cookie_handler(request):
         visits=visits+1
         request.session['last_visit']=str(datetime.now())
     else:
-        visits=1
+    else:
         request.session['last_visit']=last_visit_cookie
     request.session['visits']=visits
